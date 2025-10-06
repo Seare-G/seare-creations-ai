@@ -1,6 +1,7 @@
 import ThreeBackground from '@/components/ThreeBackground';
 import Navbar from '@/components/Navbar';
 import CustomCursor from '@/components/CustomCursor';
+import BackToTop from '@/components/BackToTop';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
@@ -16,6 +17,7 @@ const Index = () => {
       <CustomCursor />
       <ThreeBackground />
       <Navbar />
+      <BackToTop />
       <div id="home">
         <Hero />
       </div>
