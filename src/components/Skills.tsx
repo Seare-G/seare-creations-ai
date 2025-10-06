@@ -4,14 +4,60 @@ import {
   Clock,
   Brain,
   MessageSquare,
+  Code2,
+  Palette,
+  FileCode,
+  Box,
+  Layers,
+  Layout,
+  Wind,
+  Server,
+  Workflow,
+  Database,
+  CircleDot,
+  Package,
+  Terminal,
+  Github,
+  FileText,
+  Send,
+  Globe,
+  Sparkles,
+  Gem,
+  MousePointer2,
+  Heart,
 } from 'lucide-react';
 
 const techStack = {
-  Frontend: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'TailwindCSS'],
-  Backend: ['Node.js', 'Express.js'],
-  Databases: ['MySQL', 'MongoDB', 'Supabase'],
-  Tools: ['Git', 'VS Code', 'Postman', 'Vercel'],
-  AI: ['OpenAI', 'Gemini', 'Cursor', 'Lovable'],
+  Frontend: [
+    { name: 'HTML', icon: FileCode },
+    { name: 'CSS', icon: Palette },
+    { name: 'JavaScript', icon: Code2 },
+    { name: 'TypeScript', icon: FileCode },
+    { name: 'React', icon: Layers },
+    { name: 'Next.js', icon: Box },
+    { name: 'TailwindCSS', icon: Wind },
+  ],
+  Backend: [
+    { name: 'Node.js', icon: Server },
+    { name: 'Express.js', icon: Workflow },
+  ],
+  Databases: [
+    { name: 'MySQL', icon: Database },
+    { name: 'MongoDB', icon: CircleDot },
+    { name: 'Supabase', icon: Package },
+  ],
+  Tools: [
+    { name: 'Git', icon: Github },
+    { name: 'VS Code', icon: Terminal },
+    { name: 'Postman', icon: Send },
+    { name: 'Vercel', icon: Globe },
+  ],
+  AI: [
+    { name: 'OpenAI', icon: Sparkles },
+    { name: 'Gemini', icon: Gem },
+    { name: 'Cursor', icon: MousePointer2 },
+    { name: 'Lovable', icon: Heart },
+  ],
 };
 
 const softSkills = [
@@ -53,19 +99,23 @@ export default function Skills() {
               >
                 <h3 className="text-2xl font-bold mb-4 text-primary">{category}</h3>
                 <div className="flex flex-wrap gap-3">
-                  {skills.map((skill, index) => (
-                    <motion.span
-                      key={skill}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: categoryIndex * 0.1 + index * 0.05 }}
-                      whileHover={{ scale: 1.1, y: -5 }}
-                      className="px-4 py-2 bg-muted/50 rounded-lg text-foreground font-medium border border-primary/20 hover:border-primary/50 transition-all duration-300 cursor-default"
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
+                  {skills.map((skill, index) => {
+                    const Icon = skill.icon;
+                    return (
+                      <motion.div
+                        key={skill.name}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: categoryIndex * 0.1 + index * 0.05 }}
+                        whileHover={{ scale: 1.1, y: -5 }}
+                        className="flex items-center gap-2 px-4 py-2 bg-muted/50 rounded-lg text-foreground font-medium border border-primary/20 hover:border-primary/50 transition-all duration-300 cursor-default"
+                      >
+                        <Icon className="h-4 w-4 text-primary" />
+                        <span>{skill.name}</span>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </motion.div>
             ))}

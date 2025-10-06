@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import aiTaskManager from '@/assets/projects/ai-task-manager.jpg';
+import financeAnalyzer from '@/assets/projects/finance-analyzer.jpg';
+import amazonClone from '@/assets/projects/amazon-clone.jpg';
+import netflixClone from '@/assets/projects/netflix-clone.jpg';
+import portfolio from '@/assets/projects/portfolio.jpg';
 
 const projects = [
   {
@@ -9,6 +14,7 @@ const projects = [
     stack: ['Next.js', 'Gemini/OpenAI', 'Supabase'],
     description: 'Manages tasks, analyzes productivity, gives AI insights',
     gradient: 'from-cyan-500/20 to-blue-500/20',
+    image: aiTaskManager,
   },
   {
     title: 'Finance Analyzer (AI SaaS)',
@@ -16,6 +22,7 @@ const projects = [
     stack: ['Next.js', 'Express', 'MongoDB'],
     description: 'Tracks expenses, predicts savings, gives recommendations',
     gradient: 'from-purple-500/20 to-pink-500/20',
+    image: financeAnalyzer,
   },
   {
     title: 'Amazon Clone (with Gemini AI)',
@@ -23,6 +30,7 @@ const projects = [
     stack: ['Next.js', 'MySQL', 'Express'],
     description: 'Adds AI-based purchase analysis',
     gradient: 'from-orange-500/20 to-red-500/20',
+    image: amazonClone,
   },
   {
     title: 'Netflix Clone',
@@ -30,6 +38,7 @@ const projects = [
     stack: ['Next.js', 'MongoDB'],
     description: 'Showcases authentication, movies API, and clean design',
     gradient: 'from-red-500/20 to-pink-500/20',
+    image: netflixClone,
   },
   {
     title: 'Portfolio Website',
@@ -37,6 +46,7 @@ const projects = [
     stack: ['Next.js', 'Tailwind', 'Three.js'],
     description: 'Professional showcase with 3D animations',
     gradient: 'from-emerald-500/20 to-cyan-500/20',
+    image: portfolio,
   },
 ];
 
@@ -69,8 +79,15 @@ export default function Projects() {
               whileHover={{ y: -10 }}
               className="group relative overflow-hidden rounded-xl glass card-glow hover:card-glow-hover transition-all duration-300"
             >
-              {/* Gradient background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+              {/* Project Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-40 group-hover:opacity-60 transition-opacity duration-300`} />
+              </div>
               
               <div className="relative p-6 space-y-4">
                 <div className="space-y-2">
