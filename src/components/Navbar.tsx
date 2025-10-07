@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Moon, Sun } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -15,12 +14,6 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return document.documentElement.classList.contains('dark');
-    }
-    return true;
-  });
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
 
@@ -46,13 +39,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -118,55 +104,20 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right Side - Dark Mode Toggle */}
-          <div className="flex items-center space-x-4">
-            <motion.button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full glass hover:glass-hover transition-all duration-300"
-              whileHover={{ scale: 1.1, rotate: 180 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label="Toggle dark mode"
-            >
-              <AnimatePresence mode="wait">
-                {isDark ? (
-                  <motion.div
-                    key="sun"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Sun className="h-5 w-5 text-primary" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="moon"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Moon className="h-5 w-5 text-primary" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
-
-            {/* Mobile Menu Button */}
-            <motion.button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-full glass hover:glass-hover transition-all duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? (
-                <X className="h-6 w-6 text-primary" />
-              ) : (
-                <Menu className="h-6 w-6 text-primary" />
-              )}
-            </motion.button>
-          </div>
+          {/* Mobile Menu Button */}
+          <motion.button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-full glass hover:glass-hover transition-all duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? (
+              <X className="h-6 w-6 text-primary" />
+            ) : (
+              <Menu className="h-6 w-6 text-primary" />
+            )}
+          </motion.button>
         </div>
       </div>
 

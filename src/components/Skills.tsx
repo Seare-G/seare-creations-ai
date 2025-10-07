@@ -4,53 +4,54 @@ import {
   Clock,
   Brain,
   MessageSquare,
-  Code2,
-  Palette,
-  FileCode,
-  Box,
-  Layers,
-  Layout,
-  Wind,
-  Server,
-  Workflow,
-  Database,
-  CircleDot,
-  Package,
-  Terminal,
-  Github,
-  FileText,
-  Send,
-  Globe,
   Sparkles,
   Gem,
   MousePointer2,
   Heart,
 } from 'lucide-react';
 
+// Import official technology icons
+import htmlIcon from '@/assets/icons/html5.svg';
+import cssIcon from '@/assets/icons/css3.svg';
+import jsIcon from '@/assets/icons/javascript.svg';
+import tsIcon from '@/assets/icons/typescript.svg';
+import reactIcon from '@/assets/icons/react.svg';
+import nextIcon from '@/assets/icons/nextjs.svg';
+import tailwindIcon from '@/assets/icons/tailwindcss.svg';
+import nodeIcon from '@/assets/icons/nodejs.svg';
+import expressIcon from '@/assets/icons/express.svg';
+import mysqlIcon from '@/assets/icons/mysql.svg';
+import mongoIcon from '@/assets/icons/mongodb.svg';
+import supabaseIcon from '@/assets/icons/supabase.svg';
+import gitIcon from '@/assets/icons/git.svg';
+import vscodeIcon from '@/assets/icons/vscode.svg';
+import postmanIcon from '@/assets/icons/postman.svg';
+import vercelIcon from '@/assets/icons/vercel.svg';
+
 const techStack = {
   Frontend: [
-    { name: 'HTML', icon: FileCode },
-    { name: 'CSS', icon: Palette },
-    { name: 'JavaScript', icon: Code2 },
-    { name: 'TypeScript', icon: FileCode },
-    { name: 'React', icon: Layers },
-    { name: 'Next.js', icon: Box },
-    { name: 'TailwindCSS', icon: Wind },
+    { name: 'HTML', icon: htmlIcon },
+    { name: 'CSS', icon: cssIcon },
+    { name: 'JavaScript', icon: jsIcon },
+    { name: 'TypeScript', icon: tsIcon },
+    { name: 'React', icon: reactIcon },
+    { name: 'Next.js', icon: nextIcon },
+    { name: 'TailwindCSS', icon: tailwindIcon },
   ],
   Backend: [
-    { name: 'Node.js', icon: Server },
-    { name: 'Express.js', icon: Workflow },
+    { name: 'Node.js', icon: nodeIcon },
+    { name: 'Express.js', icon: expressIcon },
   ],
   Databases: [
-    { name: 'MySQL', icon: Database },
-    { name: 'MongoDB', icon: CircleDot },
-    { name: 'Supabase', icon: Package },
+    { name: 'MySQL', icon: mysqlIcon },
+    { name: 'MongoDB', icon: mongoIcon },
+    { name: 'Supabase', icon: supabaseIcon },
   ],
   Tools: [
-    { name: 'Git', icon: Github },
-    { name: 'VS Code', icon: Terminal },
-    { name: 'Postman', icon: Send },
-    { name: 'Vercel', icon: Globe },
+    { name: 'Git', icon: gitIcon },
+    { name: 'VS Code', icon: vscodeIcon },
+    { name: 'Postman', icon: postmanIcon },
+    { name: 'Vercel', icon: vercelIcon },
   ],
   AI: [
     { name: 'OpenAI', icon: Sparkles },
@@ -100,7 +101,7 @@ export default function Skills() {
                 <h3 className="text-2xl font-bold mb-4 text-primary">{category}</h3>
                 <div className="flex flex-wrap gap-3">
                   {skills.map((skill, index) => {
-                    const Icon = skill.icon;
+                    const isLucideIcon = typeof skill.icon !== 'string';
                     return (
                       <motion.div
                         key={skill.name}
@@ -111,7 +112,11 @@ export default function Skills() {
                         whileHover={{ scale: 1.1, y: -5 }}
                         className="flex items-center gap-2 px-4 py-2 bg-muted/50 rounded-lg text-foreground font-medium border border-primary/20 hover:border-primary/50 transition-all duration-300 cursor-default"
                       >
-                        <Icon className="h-4 w-4 text-primary" />
+                        {isLucideIcon ? (
+                          <skill.icon className="h-5 w-5 text-primary" />
+                        ) : (
+                          <img src={skill.icon} alt={skill.name} className="h-5 w-5" />
+                        )}
                         <span>{skill.name}</span>
                       </motion.div>
                     );
