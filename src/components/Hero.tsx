@@ -5,6 +5,32 @@ import { ArrowDown, Download, Mail } from 'lucide-react';
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Floating orbs for depth */}
+      <motion.div
+        animate={{
+          y: [0, -30, 0],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"
+      />
+      <motion.div
+        animate={{
+          y: [0, 40, 0],
+          opacity: [0.2, 0.5, 0.2],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
+      />
+      
       <div className="container mx-auto px-4 py-20 z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -44,30 +70,36 @@ export default function Hero() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="flex flex-wrap gap-4 justify-center items-center"
           >
-            <Button
-              size="lg"
-              className="glass hover:glass-hover card-glow hover:card-glow-hover transition-all duration-300 text-lg"
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              View Projects
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="glass hover:glass-hover transition-all duration-300 text-lg"
-            >
-              <Download className="mr-2 h-5 w-5" />
-              Download Resume
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="glass hover:glass-hover transition-all duration-300 text-lg"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <Mail className="mr-2 h-5 w-5" />
-              Contact Me
-            </Button>
+            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                size="lg"
+                className="glass hover:glass-hover card-glow hover:card-glow-hover transition-all duration-300 text-lg"
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                View Projects
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                size="lg"
+                variant="outline"
+                className="glass hover:glass-hover transition-all duration-300 text-lg"
+              >
+                <Download className="mr-2 h-5 w-5" />
+                Download Resume
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                size="lg"
+                variant="outline"
+                className="glass hover:glass-hover transition-all duration-300 text-lg"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <Mail className="mr-2 h-5 w-5" />
+                Contact Me
+              </Button>
+            </motion.div>
           </motion.div>
 
           <motion.div

@@ -86,10 +86,21 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="glass p-6 rounded-xl card-glow hover:card-glow-hover transition-all duration-300"
+              whileHover={{ 
+                scale: 1.02,
+                rotateY: 5,
+                rotateX: 5,
+                z: 50
+              }}
+              className="glass p-6 rounded-xl card-glow hover:card-glow-hover transition-all duration-300 perspective-card"
+              style={{ transformStyle: 'preserve-3d' }}
             >
-              <card.icon className="h-12 w-12 text-primary mb-4" />
+              <motion.div
+                whileHover={{ scale: 1.1, rotateZ: 5 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <card.icon className="h-12 w-12 text-primary mb-4" />
+              </motion.div>
               <h4 className="text-xl font-bold mb-3 text-foreground">{card.title}</h4>
               <p className="text-foreground/70 leading-relaxed">{card.description}</p>
             </motion.div>

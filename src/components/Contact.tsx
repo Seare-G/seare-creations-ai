@@ -40,7 +40,10 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-bold mb-6 text-primary">Contact Information</h3>
               <div className="space-y-6">
-                <div className="flex items-start gap-4 glass p-4 rounded-lg hover:card-glow transition-all">
+                <motion.div 
+                  whileHover={{ scale: 1.02, x: 5 }}
+                  className="flex items-start gap-4 glass p-4 rounded-lg hover:card-glow transition-all"
+                >
                   <Mail className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-foreground">Email</p>
@@ -51,9 +54,12 @@ export default function Contact() {
                       seare@example.com
                     </a>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex items-start gap-4 glass p-4 rounded-lg hover:card-glow transition-all">
+                <motion.div 
+                  whileHover={{ scale: 1.02, x: 5 }}
+                  className="flex items-start gap-4 glass p-4 rounded-lg hover:card-glow transition-all"
+                >
                   <Phone className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-foreground">Phone</p>
@@ -64,15 +70,18 @@ export default function Contact() {
                       +251 91 234 5678
                     </a>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex items-start gap-4 glass p-4 rounded-lg hover:card-glow transition-all">
+                <motion.div 
+                  whileHover={{ scale: 1.02, x: 5 }}
+                  className="flex items-start gap-4 glass p-4 rounded-lg hover:card-glow transition-all"
+                >
                   <MapPin className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-foreground">Location</p>
                     <p className="text-foreground/70">Addis Ababa, Ethiopia</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </motion.div>

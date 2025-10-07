@@ -76,7 +76,11 @@ function NeuralNetwork() {
 export default function ThreeBackground() {
   return (
     <div className="fixed inset-0 -z-10">
-      <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+      <Canvas 
+        camera={{ position: [0, 0, 5], fov: 75 }}
+        dpr={[1, 2]}
+        performance={{ min: 0.5 }}
+      >
         <color attach="background" args={['#0A0A0F']} />
         <ParticleField />
         <NeuralNetwork />

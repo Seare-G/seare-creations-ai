@@ -76,8 +76,14 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
+              whileHover={{ 
+                y: -10,
+                rotateY: 5,
+                scale: 1.02,
+                z: 50
+              }}
               className="group relative overflow-hidden rounded-xl glass card-glow hover:card-glow-hover transition-all duration-300"
+              style={{ transformStyle: 'preserve-3d' }}
             >
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden">

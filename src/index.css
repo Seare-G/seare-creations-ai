@@ -109,6 +109,19 @@ All colors MUST be HSL.
     backdrop-filter: blur(16px);
     border: 1px solid hsl(var(--primary) / 0.3);
   }
+
+  .perspective-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .transform-3d {
+    transform: translateZ(20px);
+  }
+
+  .parallax-slow {
+    transform: translateY(var(--scroll-y, 0));
+  }
 }
 
 @layer base {
