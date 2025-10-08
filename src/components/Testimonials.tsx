@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import { useRef } from 'react';
 
 const testimonials = [
   {
@@ -41,6 +44,10 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
+  );
+
   return (
     <section id="testimonials" className="relative py-20 px-4 md:px-8 overflow-hidden">
       {/* Background decorative elements */}
@@ -66,50 +73,58 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={testimonial.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ 
-                y: -8, 
-                scale: 1.02,
-                rotateY: 2,
-                z: 50
-              }}
-              className="glass p-6 rounded-xl border border-primary/20 perspective-card transform-3d"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              {/* Quote Icon */}
-              <div className="mb-4">
-                <Quote className="w-8 h-8 text-primary opacity-50" />
-              </div>
+        {/* Testimonials Carousel */}
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+            slidesToScroll: 1,
+          }}
+          plugins={[autoplayPlugin.current]}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {testimonials.map((testimonial, index) => (
+              <CarouselItem key={testimonial.name} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ 
+                    y: -8, 
+                    scale: 1.02,
+                  }}
+                  className="glass p-6 rounded-xl border border-primary/20 h-full flex flex-col"
+                >
+                  {/* Quote Icon */}
+                  <div className="mb-4">
+                    <Quote className="w-8 h-8 text-primary opacity-50" />
+                  </div>
 
-              {/* Feedback Text */}
-              <p className="text-foreground/90 mb-6 leading-relaxed">
-                "{testimonial.feedback}"
-              </p>
+                  {/* Feedback Text */}
+                  <p className="text-foreground/90 mb-6 leading-relaxed flex-grow">
+                    "{testimonial.feedback}"
+                  </p>
 
-              {/* Profile Section */}
-              <div className="flex items-center gap-4 pt-4 border-t border-primary/10">
-                <Avatar className="h-12 w-12 ring-2 ring-primary/20">
-                  <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                  <AvatarFallback className="bg-primary/10 text-primary">
-                    {testimonial.initials}
-                  </AvatarFallback>
-                </Avatar>
-                <div>
-                  <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                  {/* Profile Section */}
+                  <div className="flex items-center gap-4 pt-4 border-t border-primary/10">
+                    <Avatar className="h-12 w-12 ring-2 ring-primary/20">
+                      <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                      <AvatarFallback className="bg-primary/10 text-primary">
+                        {testimonial.initials}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       </div>
     </section>
   );
