@@ -44,14 +44,14 @@ export default function About() {
           <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
         </motion.div>
 
-        <div className="flex flex-col md:flex-row gap-12 items-start">
-          {/* Profile Photo - Left */}
+        <div className="relative">
+          {/* Profile Photo - Floating on Left */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="w-full md:w-auto flex justify-center md:justify-start flex-shrink-0"
+            className="mb-8 md:mb-0 md:float-left md:mr-8 flex justify-center md:justify-start"
           >
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -67,8 +67,8 @@ export default function About() {
             </motion.div>
           </motion.div>
 
-          {/* Content Sections - Right */}
-          <div className="flex-1 space-y-8">
+          {/* Content Sections - Flow Around Photo */}
+          <div className="space-y-8">
             {sections.map((section, index) => (
               <motion.div
                 key={index}
@@ -88,6 +88,9 @@ export default function About() {
               </motion.div>
             ))}
           </div>
+
+          {/* Clear float */}
+          <div className="clear-both" />
         </div>
       </div>
     </section>

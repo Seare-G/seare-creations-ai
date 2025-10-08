@@ -45,7 +45,12 @@ const testimonials = [
 
 export default function Testimonials() {
   const autoplayPlugin = useRef(
-    Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: true })
+    Autoplay({ 
+      delay: 3000, 
+      stopOnInteraction: false, 
+      stopOnMouseEnter: true,
+      stopOnFocusIn: false
+    })
   );
 
   return (
