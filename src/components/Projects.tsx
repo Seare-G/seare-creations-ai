@@ -9,10 +9,10 @@ import portfolio from '@/assets/projects/portfolio.jpg';
 
 const projects = [
   {
-    title: 'AI Task Manager (SaaS)',
-    type: 'Unique AI-powered platform',
-    stack: ['Next.js', 'Gemini/OpenAI', 'Supabase'],
-    description: 'Manages tasks, analyzes productivity, gives AI insights',
+    title: 'SocialAI (Social Media + AI)',
+    type: 'Social platform with AI-powered features',
+    stack: ['Next.js', 'Gemini AI', 'Supabase'],
+    description: 'Social media platform with real-time chat and AI-powered content generation',
     gradient: 'from-cyan-500/20 to-blue-500/20',
     image: aiTaskManager,
   },
