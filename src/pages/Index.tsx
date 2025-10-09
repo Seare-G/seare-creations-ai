@@ -19,30 +19,32 @@ const Index = () => {
       <ThreeBackground />
       <Navbar />
       <BackToTop />
-      <div id="home">
-        <Hero />
-      </div>
-      <div id="about">
-        <About />
-      </div>
-      <div id="skills">
-        <Skills />
-      </div>
-      <div id="projects">
-        <Projects />
-      </div>
-      <div id="journey">
-        <Journey />
-      </div>
-      <div id="services">
-        <Services />
-      </div>
-      <div id="testimonials">
-        <Testimonials />
-      </div>
-      <div id="contact">
-        <Contact />
-      </div>
+      <main>
+        <section id="home">
+          <Hero />
+        </section>
+        <section id="about">
+          <About />
+        </section>
+        <section id="skills">
+          <Skills />
+        </section>
+        <section id="projects">
+          <Projects />
+        </section>
+        <section id="journey">
+          <Journey />
+        </section>
+        <section id="services">
+          <Services />
+        </section>
+        <section id="testimonials">
+          <Testimonials />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
+      </main>
       <Footer />
     </div>
   );

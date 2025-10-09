@@ -61,7 +61,10 @@ export default function About() {
               <div className="absolute inset-0 bg-primary/30 rounded-full blur-2xl animate-pulse" />
               <img
                 src={profileImage}
-                alt="Seare Gebretsadkan - Full Stack Developer"
+                alt="Seare Gebretsadkan - Full Stack Developer Profile Photo"
+                width="320"
+                height="320"
+                loading="lazy"
                 className="relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-4 border-primary/50 shadow-2xl"
               />
             </motion.div>

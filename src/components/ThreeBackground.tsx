@@ -1,9 +1,9 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, memo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
-function ParticleField() {
+const ParticleField = memo(function ParticleField() {
   const ref = useRef<THREE.Points>(null);
   
   const particlesCount = 2000;
@@ -36,9 +36,9 @@ function ParticleField() {
       />
     </Points>
   );
-}
+});
 
-function NeuralNetwork() {
+const NeuralNetwork = memo(function NeuralNetwork() {
   const ref = useRef<THREE.Group>(null);
   
   useFrame((state) => {
@@ -71,9 +71,9 @@ function NeuralNetwork() {
       ))}
     </group>
   );
-}
+});
 
-export default function ThreeBackground() {
+const ThreeBackground = memo(function ThreeBackground() {
   return (
     <div className="fixed inset-0 -z-10">
       <Canvas 
@@ -87,4 +87,6 @@ export default function ThreeBackground() {
       </Canvas>
     </div>
   );
-}
+});
+
+export default ThreeBackground;

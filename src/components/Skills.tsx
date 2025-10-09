@@ -115,7 +115,7 @@ export default function Skills() {
                         {isLucideIcon ? (
                           <skill.icon className="h-5 w-5 text-primary" />
                         ) : (
-                          <img src={skill.icon} alt={skill.name} className="h-5 w-5" />
+                          <img src={skill.icon} alt={`${skill.name} technology logo`} width="20" height="20" loading="lazy" className="h-5 w-5" />
                         )}
                         <span>{skill.name}</span>
                       </motion.div>

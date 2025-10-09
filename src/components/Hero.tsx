@@ -4,7 +4,7 @@ import { ArrowDown, Download, Mail } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <header className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Floating orbs for depth */}
       <motion.div
         animate={{
@@ -115,6 +115,6 @@ export default function Hero() {
 
       {/* Gradient overlay */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-    </section>
+    </header>
   );
 }
