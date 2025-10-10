@@ -4,11 +4,70 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { supabase } from '@/integrations/supabase/client';
+import { useState } from 'react';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form';
+
+const contactSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(1, { message: "Name is required" })
+    .max(100, { message: "Name must be less than 100 characters" }),
+  email: z.string()
+    .trim()
+    .email({ message: "Invalid email address" })
+    .max(255, { message: "Email must be less than 255 characters" }),
+  message: z.string()
+    .trim()
+    .min(1, { message: "Message is required" })
+    .max(1000, { message: "Message must be less than 1000 characters" }),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function Contact() {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success('Message sent successfully! I\'ll get back to you soon.');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      message: '',
+    },
+  });
+
+  const handleSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    
+    try {
+      const { error } = await supabase
+        .from('contacts')
+        .insert({
+          name: data.name,
+          email: data.email,
+          message: data.message,
+        });
+
+      if (error) throw error;
+
+      toast.success('Message sent successfully! I\'ll get back to you soon.');
+      form.reset();
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      toast.error('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -93,44 +152,74 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <form onSubmit={handleSubmit} className="glass p-8 rounded-xl card-glow space-y-6">
-              <h3 className="text-2xl font-bold mb-6 text-secondary">Send a Message</h3>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleSubmit)} className="glass p-8 rounded-xl card-glow space-y-6">
+                <h3 className="text-2xl font-bold mb-6 text-secondary">Send a Message</h3>
 
-              <div>
-                <Input
-                  placeholder="Your Name"
-                  required
-                  className="bg-muted/30 border-primary/20 focus:border-primary transition-colors"
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          placeholder="Your Name"
+                          className="bg-muted/30 border-primary/20 focus:border-primary transition-colors"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              <div>
-                <Input
-                  type="email"
-                  placeholder="Your Email"
-                  required
-                  className="bg-muted/30 border-primary/20 focus:border-primary transition-colors"
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="Your Email"
+                          className="bg-muted/30 border-primary/20 focus:border-primary transition-colors"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              <div>
-                <Textarea
-                  placeholder="Your Message"
-                  required
-                  rows={6}
-                  className="bg-muted/30 border-primary/20 focus:border-primary transition-colors resize-none"
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Your Message"
+                          rows={6}
+                          className="bg-muted/30 border-primary/20 focus:border-primary transition-colors resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full glass hover:glass-hover card-glow hover:card-glow-hover transition-all text-lg"
-              >
-                <Send className="mr-2 h-5 w-5" />
-                Send Message
-              </Button>
-            </form>
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={isSubmitting}
+                  className="w-full glass hover:glass-hover card-glow hover:card-glow-hover transition-all text-lg"
+                >
+                  <Send className="mr-2 h-5 w-5" />
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </Button>
+              </form>
+            </Form>
           </motion.div>
         </div>
       </div>
